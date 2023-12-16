@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 
 const Signup = () => {
@@ -36,7 +37,21 @@ const Signup = () => {
   //handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(validateFields(inputFields));
+    setSubmit(true);
+    setError(validateFields(inputFields));
+    if (Object.keys(error).length === 0 && submit) {
+      const user = {
+        name: inputFields.name,
+        email: inputFields.email,
+        password: inputFields.password,
+        password_confirm: inputFields.password_confirm,
+      };
+
+      axios
+        .post("http://localhost/projects/login-system/process-signup.php", user)
+        .then((res) => res.data)
+        .then((data) => console.log(data));
+    }
   };
 
   return (
@@ -57,7 +72,7 @@ const Signup = () => {
         <div className="form-control">
           <label htmlFor="email">email</label>
           <input
-            type="email"
+            type="text"
             name="email"
             id="email"
             value={inputFields.email}
@@ -79,7 +94,7 @@ const Signup = () => {
         <div className="form-control">
           <label htmlFor="password_confirm">password_confirm</label>
           <input
-            type="password_confirm"
+            type="password"
             name="password_confirm"
             id="password_confirm"
             value={inputFields.password_confirm}
@@ -88,8 +103,6 @@ const Signup = () => {
         </div>
         <button>Signup</button>
       </form>
-      <p> {inputFields.name} </p>
-      <p> {inputFields.email} </p>
     </div>
   );
 };
