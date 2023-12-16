@@ -15,13 +15,34 @@ const Signup = () => {
 
   //validate fields
   const validateFields = (fields) => {
+    let errors = {};
     const emailReg =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (fields.name.length < 12) {
+      errors.name = "name cannot be less than 12 characters";
+    }
+    if (!emailReg.test(fields.email)) {
+      errors.email = "Invaild email";
+    }
+    if (fields.password.length < 8) {
+      errors.password = "password cannot be less than 8 characters";
+    }
+    if (fields.password !== fields.password_confirm) {
+      errors.password_confirm = "password does not match";
+    }
+    return errors;
   };
+
+  //handle submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(validateFields(inputFields));
+  };
+
   return (
     <div className="signup">
       <h2>Signup</h2>
-      <form className="signup-form">
+      <form className="signup-form" onSubmit={handleSubmit}>
         <div className="form-control">
           <label htmlFor="name">name</label>
           <input
@@ -65,8 +86,8 @@ const Signup = () => {
             onChange={handleChange}
           />
         </div>
+        <button>Signup</button>
       </form>
-      <button>Signup</button>
       <p> {inputFields.name} </p>
       <p> {inputFields.email} </p>
     </div>
