@@ -58,6 +58,7 @@ const Signup = () => {
     <div className="signup">
       <h2>Signup</h2>
       <form className="signup-form" onSubmit={handleSubmit}>
+        <p>{error.name ? "name cannot be less than 8 characters" : null} </p>
         <div className="form-control">
           <label htmlFor="name">name</label>
           <input
@@ -69,6 +70,7 @@ const Signup = () => {
           />
         </div>
 
+        <p> {error.email ? "invalid email" : null} </p>
         <div className="form-control">
           <label htmlFor="email">email</label>
           <input
@@ -80,6 +82,9 @@ const Signup = () => {
           />
         </div>
 
+        <p>
+          {error.password ? "password cannot be less than 8 characters" : null}
+        </p>
         <div className="form-control">
           <label htmlFor="password">password</label>
           <input
@@ -90,7 +95,7 @@ const Signup = () => {
             onChange={handleChange}
           />
         </div>
-
+        <p>{error.password_confirm ? "passwords do not match" : null}</p>
         <div className="form-control">
           <label htmlFor="password_confirm">password_confirm</label>
           <input

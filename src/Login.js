@@ -23,7 +23,7 @@ const Login = () => {
       axios
         .post("http://localhost/projects/login-system/login.php", userData)
         .then((res) => res.data)
-        .then((data) => console.log(data));
+        .then((data) => localStorage.setItem("token", data.info));
     }
   };
   return (
