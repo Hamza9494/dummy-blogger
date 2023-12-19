@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const [fields, setFields] = useState({
@@ -7,9 +8,8 @@ const Create = () => {
     title: "",
     body: "",
   });
-
   const [submit, setSubmit] = useState(false);
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFields({ ...fields, [e.target.name]: e.target.value });
   };
@@ -29,8 +29,7 @@ const Create = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         })
-        .then((res) => res.data)
-        .then((data) => console.log(data));
+        .then(() => navigate("/blogs"));
     }
   };
   return (

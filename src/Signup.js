@@ -49,8 +49,7 @@ const Signup = () => {
 
       axios
         .post("http://localhost/projects/login-system/process-signup.php", user)
-        .then((res) => res.data)
-        .then((data) => console.log(data));
+        .then((res) => console.log(res));
     }
   };
 
