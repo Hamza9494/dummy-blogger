@@ -29,6 +29,10 @@ const BlogDetails = () => {
       .then(() => navigate("/blogs"));
   };
 
+  const handleEdit = () => {
+    navigate(`/edit-blog/${id}`);
+  };
+
   return (
     <div className="blog-details">
       <h2>blog details</h2>
@@ -38,6 +42,7 @@ const BlogDetails = () => {
           <p> {blog.body} </p>
           <p> {blog.author} </p>
           <button onClick={handleClick}>Delete</button>
+          <button onClick={handleEdit}>Edit Blog</button>
         </div>
       )}
     </div>
